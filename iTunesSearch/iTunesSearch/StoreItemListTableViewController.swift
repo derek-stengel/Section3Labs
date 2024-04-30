@@ -68,6 +68,17 @@ class StoreItemListTableViewController: UITableViewController {
         cell.artist = item.composer
         cell.artworkImage = nil
         
+        storeItemVC.fetchArtworkImage(for: item) { image in
+            if let image = image {
+                DispatchQueue.main.async {
+                    cell.artworkImage = image
+                }
+            } else {
+                print("Failed to fetch artwork image for item \(item.title)")
+            }
+        }
+    
+        
         
         // set cell.name to the item's name
         

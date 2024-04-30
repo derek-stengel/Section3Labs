@@ -37,4 +37,28 @@ class StoreItemController: UIViewController {
         return searchResponse.results
     }
     
+    func fetchArtworkImage(for item: StoreItem, completion: @escaping (UIImage?) -> Void) {
+        guard let imageURL = URL(string: item.artworkURL100) else {
+            completion(nil)
+            return
+        }
+        
+        let task = URLSession.shared.dataTask(with: imageURL) { data, response, error in
+            if let error = error {
+                print("Error fetching image: \(error)")
+                completion(nil)
+                return
+            }
+            
+            guard let data = data, let image = UIImage(data: data) else {
+                print("Invalid image data")
+                completion(nil)
+                return
+            }
+            
+            completion(image)
+        }
+        task.resume()
+    }
+    
 }
