@@ -11,7 +11,6 @@ class StoreItemListTableViewController: UITableViewController {
     var items = [StoreItem]()
     var imageLoadTasks: [IndexPath: Task<Void, Never>] = [:]
     
-    
     let queryOptions = ["movie", "music", "software", "ebook"]
     
     override func viewDidLoad() {
@@ -32,9 +31,9 @@ class StoreItemListTableViewController: UITableViewController {
             let query = [
                 "term": searchTerm,
                 "media": mediaType,
-                "attribute": "movieTerm",
+//                "attribute": "movieTerm",
                 "lang": "en_us",
-                "limit": "10"
+                "limit": "100"
             ]
             
             Task {
